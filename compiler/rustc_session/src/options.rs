@@ -2131,6 +2131,7 @@ options! {
         "instrument the generated code to support LLVM source-based code coverage reports \
         (note, the compiler build config must include `profiler = true`); \
         implies `-C symbol-mangling-version=v0`"),
+    iu_playground: bool = (false, parse_no_flag, [TRACKED],
     jump_tables: bool = (true, parse_bool, [TRACKED],
         "allow jump table and lookup table generation from switch case lowering (default: yes)"),
     link_arg: (/* redirected to link_args */) = ((), parse_string_push, [UNTRACKED],

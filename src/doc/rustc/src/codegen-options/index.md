@@ -209,6 +209,10 @@ Note that while the `-C instrument-coverage` option is stable, the profile data
 format produced by the resulting instrumentation may change, and may not work
 with coverage tools other than those built and shipped with the compiler.
 
+## iu_playground
+
+TBD
+
 ## jump-tables
 
 This option is used to allow or prevent the LLVM codegen backend from creating
