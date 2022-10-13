@@ -47,6 +47,9 @@ use std::slice;
 use std::str;
 use std::sync::Arc;
 
+pub fn llvm_note(handler: &rustc_errors::Handler, msg: &str) {
+    handler.note_without_error(msg);
+}
 pub fn llvm_err<'a>(dcx: &rustc_errors::DiagCtxt, err: LlvmError<'a>) -> FatalError {
     match llvm::last_error() {
         Some(llvm_err) => dcx.emit_almost_fatal(WithLlvmError(err, llvm_err)),
