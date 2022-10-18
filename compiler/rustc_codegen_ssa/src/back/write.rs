@@ -123,6 +123,9 @@ pub struct ModuleConfig {
     pub inline_threshold: Option<u32>,
     pub emit_lifetime_markers: bool,
     pub llvm_plugins: Vec<String>,
+
+    // Inner unikernel
+    pub iu_playground: bool,
 }
 
 impl ModuleConfig {
@@ -283,6 +286,8 @@ impl ModuleConfig {
             inline_threshold: sess.opts.cg.inline_threshold,
             emit_lifetime_markers: sess.emit_lifetime_markers(),
             llvm_plugins: if_regular!(sess.opts.unstable_opts.llvm_plugins.clone(), vec![]),
+
+            iu_playground: sess.opts.cg.iu_playground,
         }
     }
 
