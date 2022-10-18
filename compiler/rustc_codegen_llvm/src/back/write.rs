@@ -561,7 +561,13 @@ pub(crate) unsafe fn llvm_optimize(
     let llvm_selfprofiler =
         llvm_profiler.as_mut().map(|s| s as *mut _ as *mut c_void).unwrap_or(std::ptr::null_mut());
 
-    let extra_passes = if !is_lto { config.passes.join(",") } else { "".to_string() };
+    // TODO does the order matter?
+    let mut passes_plus_iu = config.passes.clone();
+    if config.iu_playground {
+        passes_plus_iu.push("helloworld".to_string());
+    }
+
+    let extra_passes = if !is_lto { passes_plus_iu.join(",") } else { "".to_string() };
 
     llvm_note(diag_handler, &format!("extra_passes {}", extra_passes));
 
@@ -610,6 +616,9 @@ pub(crate) unsafe fn optimize(
     module: &ModuleCodegen<ModuleLlvm>,
     config: &ModuleConfig,
 ) -> Result<(), FatalError> {
+    if config.iu_playground {
+        llvm_note(diag_handler, "Hello, inner unikernel!");
+    }
     let _timer = cgcx.prof.generic_activity_with_arg("LLVM_module_optimize", &*module.name);
 
     let llmod = module.module_llvm.llmod();
