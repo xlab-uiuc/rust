@@ -10,6 +10,17 @@
 [Website][Rust] | [Getting started] | [Learn] | [Documentation] | [Contributing]
 </div>
 
+# Fork for the inner unikernel project
+
+```shell
+rustc -C iu_playground           `# New codegen option` \
+      -C passes="helloworld"     `# Which basically does the same thing as this line` \
+      -Z new-llvm-pass-manager=y `# We assume the new pass manager, which is the default` \
+      whatever.rs
+```
+
+# The Rust Programming Language
+
 This is the main source code repository for [Rust]. It contains the compiler,
 standard library, and documentation.
 
