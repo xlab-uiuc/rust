@@ -13,7 +13,7 @@
 # Fork for the inner unikernel project
 
 ```shell
-rustc -C iu_playground           `# New codegen option` \
+rustc -C iu-playground           `# New codegen option` \
       -C passes="helloworld"     `# Which basically does the same thing as this line` \
       -Z new-llvm-pass-manager=y `# We assume the new pass manager, which is the default` \
       whatever.rs
