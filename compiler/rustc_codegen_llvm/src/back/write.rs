@@ -565,9 +565,11 @@ pub(crate) unsafe fn llvm_optimize(
         llvm_profiler.as_mut().map(|s| s as *mut _ as *mut c_void).unwrap_or(std::ptr::null_mut());
 
     // TODO does the order matter?
+    // Jinghao: maybe? but let's put it at the back for now given the vec
+    // slice is currently empty
     let mut passes_plus_iu = config.passes.clone();
     if config.iu_playground {
-        passes_plus_iu.push("helloworld".to_string());
+        passes_plus_iu.push("iu-entry-insertion".to_string());
     }
 
     let extra_passes = if !is_lto { passes_plus_iu.join(",") } else { "".to_string() };
