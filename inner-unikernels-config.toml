@@ -160,7 +160,7 @@ cxxflags = "-pipe"
 #clang = false
 
 [llvm.build-config]
-CMAKE_VERBOSE_MAKEFILE = "ON"
+#CMAKE_VERBOSE_MAKEFILE = "ON"
 
 # =============================================================================
 # General build configuration options
@@ -288,7 +288,7 @@ extended = true
 tools = ["cargo", "rls", "clippy", "rustfmt", "analysis", "src"] # + "rust-demangler" if `profiler`
 
 # Verbosity level: 0 == not verbose, 1 == verbose, 2 == very verbose
-verbose = 2
+verbose = 0
 
 # Build the sanitizer runtimes
 #sanitizers = false
@@ -316,13 +316,13 @@ verbose = 2
 
 # Print out how long each rustbuild step took (mostly intended for CI and
 # tracking over time)
-print-step-timings = true
+#print-step-timings = true
 
 # Print out resource usage data for each rustbuild step, as defined by the Unix
 # struct rusage. (Note that this setting is completely unstable: the data it
 # captures, what platforms it supports, the format of its associated output, and
 # this setting's very existence, are all subject to change.)
-print-step-rusage = true
+#print-step-rusage = true
 
 # Always patch binaries for usage with Nix toolchains. If `true` then binaries
 # will be patched unconditionally. If `false` or unset, binaries will be patched
