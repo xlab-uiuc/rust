@@ -65,10 +65,10 @@ changelog-seen = 2
 #thin-lto = false
 
 # Indicates whether an LLVM Release build should include debug info
-#release-debuginfo = true
+release-debuginfo = true
 
 # Indicates whether the LLVM assertions are enabled or not
-#assertions = true
+assertions = true
 
 # Indicates whether the LLVM testsuite is enabled in the build or not. Does
 # not execute the tests as part of the build as part of x.py build et al,
@@ -119,7 +119,7 @@ experimental-targets = ""
 # each linker process.
 # If absent or 0, linker invocations are treated like any other job and
 # controlled by rustbuild's -j parameter.
-#link-jobs = 0
+link-jobs = 2
 
 # When invoking `llvm-config` this configures whether the `--shared` argument is
 # passed to prefer linking to shared libraries.
@@ -129,7 +129,7 @@ experimental-targets = ""
 # When building llvm, this configures what is being appended to the version.
 # The default is "-rust-$version-$channel", except for dev channel where rustc
 # version number is omitted. To use LLVM version as is, provide an empty string.
-#version-suffix = "-rust-dev"
+version-suffix = "-rust-inner-unikernels"
 
 # On MSVC you can compile LLVM with clang-cl, but the test suite doesn't pass
 # with clang-cl, so this is special in that it only compiles LLVM with clang-cl.
@@ -137,9 +137,9 @@ experimental-targets = ""
 #clang-cl = cc
 
 # Pass extra compiler and linker flags to the LLVM CMake build.
-cflags = "-pipe"
-cxxflags = "-pipe"
-#ldflags = ""
+cflags = "-march=native -pipe"
+cxxflags = "-march=native -pipe"
+ldflags = "-Wl,-O1 -Wl,--as-needed -Wl,--gc-sections"
 
 # Use libc++ when building LLVM instead of libstdc++. This is the default on
 # platforms already use libc++ as the default C++ library, but this option
@@ -148,7 +148,7 @@ cxxflags = "-pipe"
 #use-libcxx = false
 
 # The value specified here will be passed as `-DLLVM_USE_LINKER` to CMake.
-#use-linker = <none> (path)
+use-linker = "mold"
 
 # Whether or not to specify `-DLLVM_TEMPORARILY_ALLOW_OLD_TOOLCHAIN=YES`
 #allow-old-toolchain = false
