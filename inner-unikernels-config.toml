@@ -65,7 +65,7 @@ changelog-seen = 2
 #thin-lto = false
 
 # Indicates whether an LLVM Release build should include debug info
-release-debuginfo = true
+# release-debuginfo = false
 
 # Indicates whether the LLVM assertions are enabled or not
 assertions = true
@@ -119,7 +119,7 @@ experimental-targets = ""
 # each linker process.
 # If absent or 0, linker invocations are treated like any other job and
 # controlled by rustbuild's -j parameter.
-link-jobs = 2
+link-jobs = 0
 
 # When invoking `llvm-config` this configures whether the `--shared` argument is
 # passed to prefer linking to shared libraries.
