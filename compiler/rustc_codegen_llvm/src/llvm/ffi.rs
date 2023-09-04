@@ -2326,6 +2326,7 @@ unsafe extern "C" {
         EmitStackSizeSection: bool,
         RelaxELFRelocations: bool,
         UseInitArray: bool,
+        IUEnabled: bool,
         SplitDwarfFile: *const c_char,
         OutputObjFile: *const c_char,
         DebugInfoCompression: *const c_char,

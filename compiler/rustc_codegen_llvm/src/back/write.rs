@@ -249,6 +249,7 @@ pub(crate) fn target_machine_factory(
         !sess.opts.unstable_opts.use_ctors_section.unwrap_or(sess.target.use_ctors_section);
 
     let path_mapping = sess.source_map().path_mapping().clone();
+    let iu_enabled = sess.opts.cg.iu_playground;
 
     let use_emulated_tls = matches!(sess.tls_model(), TlsModel::Emulated);
 
@@ -313,6 +314,7 @@ pub(crate) fn target_machine_factory(
             &debuginfo_compression,
             use_emulated_tls,
             use_wasm_eh,
+            iu_enabled,
         )
     })
 }
