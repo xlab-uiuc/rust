@@ -412,6 +412,7 @@ extern "C" LLVMTargetMachineRef LLVMRustCreateTargetMachine(
     const char *SplitDwarfFile, const char *OutputObjFile,
     const char *DebugInfoCompression, bool UseEmulatedTls,
     const char *ArgsCstrBuff, size_t ArgsCstrBuffLen) {
+    bool IUEnabled,
 
   auto OptLevel = fromRust(RustOptLevel);
   auto RM = fromRust(RustReloc);
@@ -474,6 +475,7 @@ extern "C" LLVMTargetMachineRef LLVMRustCreateTargetMachine(
 #endif
   Options.UseInitArray = UseInitArray;
   Options.EmulatedTLS = UseEmulatedTls;
+  Options.IUEnabled = IUEnabled;
 
   if (TrapUnreachable) {
     // Tell LLVM to codegen `unreachable` into an explicit trap instruction.
