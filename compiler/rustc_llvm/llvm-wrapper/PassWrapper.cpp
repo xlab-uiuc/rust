@@ -330,6 +330,7 @@ extern "C" LLVMTargetMachineRef LLVMRustCreateTargetMachine(
   Options.MCOptions.X86RelaxRelocations = RelaxELFRelocations;
   Options.UseInitArray = UseInitArray;
   Options.EmulatedTLS = UseEmulatedTls;
+  Options.IUEnabled = IUEnabled;
 
   if (TrapUnreachable) {
     // Tell LLVM to codegen `unreachable` into an explicit trap instruction.

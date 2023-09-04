@@ -239,6 +239,7 @@ pub(crate) fn target_machine_factory(
 
     let path_mapping = sess.source_map().path_mapping().clone();
     let working_dir = sess.source_map().working_dir().clone();
+    let iu_enabled = sess.opts.cg.iu_playground;
 
     let use_emulated_tls = matches!(sess.tls_model(), TlsModel::Emulated);
 
@@ -308,6 +309,7 @@ pub(crate) fn target_machine_factory(
             use_emulated_tls,
             use_wasm_eh,
             large_data_threshold,
+            iu_enabled,
         )
         .unwrap_or_else(|err| dcx.emit_fatal(ParseTargetMachineConfig(err)))
     })
