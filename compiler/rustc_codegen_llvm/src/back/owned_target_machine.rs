@@ -41,6 +41,7 @@ impl OwnedTargetMachine {
         use_emulated_tls: bool,
         args_cstr_buff: &[u8],
         use_wasm_eh: bool,
+        iu_enabled: bool,
     ) -> Result<Self, LlvmError<'static>> {
         // The argument list is passed as the concatenation of one or more C strings.
         // This implies that there must be a last byte, and it must be 0.
@@ -66,6 +67,7 @@ impl OwnedTargetMachine {
                 emit_stack_size_section,
                 relax_elf_relocations,
                 use_init_array,
+                iu_enabled,
                 split_dwarf_file.as_ptr(),
                 output_obj_file.as_ptr(),
                 debug_info_compression.as_ptr(),
