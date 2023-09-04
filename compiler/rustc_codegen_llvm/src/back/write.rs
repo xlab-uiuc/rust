@@ -218,6 +218,7 @@ pub fn target_machine_factory(
         !sess.opts.unstable_opts.use_ctors_section.unwrap_or(sess.target.use_ctors_section);
 
     let path_mapping = sess.source_map().path_mapping().clone();
+    let iu_enabled = sess.opts.cg.iu_playground;
 
     Arc::new(move |config: TargetMachineFactoryConfig| {
         let split_dwarf_file =
@@ -243,6 +244,7 @@ pub fn target_machine_factory(
                 emit_stack_size_section,
                 relax_elf_relocations,
                 use_init_array,
+                iu_enabled,
                 split_dwarf_file.as_ptr(),
             )
         };
