@@ -646,8 +646,6 @@ pub(crate) unsafe fn llvm_optimize(
 
     let extra_passes = if !is_lto { passes_plus_iu.join(",") } else { "".to_string() };
 
-    llvm_note(diag_handler, &format!("extra_passes {}", extra_passes));
-
     let llvm_plugins = config.llvm_plugins.join(",");
 
     let result = unsafe {
@@ -699,9 +697,6 @@ pub(crate) unsafe fn optimize(
     module: &mut ModuleCodegen<ModuleLlvm>,
     config: &ModuleConfig,
 ) -> Result<(), FatalError> {
-    if config.iu_playground {
-        llvm_note(diag_handler, "Hello, inner unikernel!");
-    }
     let _timer = cgcx.prof.generic_activity_with_arg("LLVM_module_optimize", &*module.name);
 
     let llcx = &*module.module_llvm.llcx;
