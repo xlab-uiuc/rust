@@ -480,8 +480,6 @@ pub(crate) unsafe fn optimize_with_new_llvm_pass_manager(
 
     let extra_passes = if !is_lto { passes_plus_iu.join(",") } else { "".to_string() };
 
-    llvm_note(diag_handler, &format!("extra_passes {}", extra_passes));
-
     let llvm_plugins = config.llvm_plugins.join(",");
 
     // FIXME: NewPM doesn't provide a facility to pass custom InlineParams.
@@ -526,9 +524,6 @@ pub(crate) unsafe fn optimize(
     module: &ModuleCodegen<ModuleLlvm>,
     config: &ModuleConfig,
 ) -> Result<(), FatalError> {
-    if config.iu_playground {
-        llvm_note(diag_handler, "Hello, inner unikernel!");
-    }
     let _timer = cgcx.prof.generic_activity_with_arg("LLVM_module_optimize", &*module.name);
 
     let llmod = module.module_llvm.llmod();
@@ -556,7 +551,6 @@ pub(crate) unsafe fn optimize(
             &config.new_llvm_pass_manager,
             &cgcx.target_arch,
         ) {
-            llvm_note(diag_handler, "Optimize with the new pass manager");
             let opt_stage = match cgcx.lto {
                 Lto::Fat => llvm::OptStage::PreLinkFatLTO,
                 Lto::Thin | Lto::ThinLocal => llvm::OptStage::PreLinkThinLTO,
@@ -572,8 +566,6 @@ pub(crate) unsafe fn optimize(
                 opt_stage,
             );
         }
-
-        llvm_note(diag_handler, "Optimize with the old pass manager");
 
         if cgcx.prof.llvm_recording_enabled() {
             diag_handler
@@ -602,7 +594,6 @@ pub(crate) unsafe fn optimize(
             let mut have_name_anon_globals_pass = false;
 
             for pass_name in &config.passes {
-                llvm_note(diag_handler, &format!("pass_name {}", pass_name));
                 if pass_name == "lint" {
                     // Linting should also be performed early, directly on the generated IR.
                     llvm::LLVMRustAddPass(fpm, find_pass("lint").unwrap());
