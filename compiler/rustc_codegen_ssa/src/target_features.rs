@@ -189,6 +189,7 @@ const X86_ALLOWED_FEATURES: &[(&str, Option<Symbol>)] = &[
     ("sse4.2", None),
     ("sse4a", Some(sym::sse4a_target_feature)),
     ("ssse3", None),
+    ("soft-float", None),
     ("tbm", Some(sym::tbm_target_feature)),
     ("xsave", None),
     ("xsavec", None),
