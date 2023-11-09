@@ -137,8 +137,8 @@ version-suffix = "-rust-inner-unikernels"
 #clang-cl = cc
 
 # Pass extra compiler and linker flags to the LLVM CMake build.
-cflags = "-march=native -pipe"
-cxxflags = "-march=native -pipe"
+cflags = "-march=x86-64 -mno-avx -pipe"
+cxxflags = "-march=x86-64 -mno-avx -pipe"
 ldflags = "-Wl,-O1 -Wl,--as-needed -Wl,--gc-sections"
 
 # Use libc++ when building LLVM instead of libstdc++. This is the default on
