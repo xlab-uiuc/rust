@@ -282,7 +282,7 @@ pub fn target_machine_factory(
             &args_cstr_buff,
             iu_enabled,
         )
-    })
+    }
 }
 
 pub(crate) fn save_temp_bitcode(
