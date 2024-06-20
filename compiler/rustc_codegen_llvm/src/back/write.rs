@@ -316,7 +316,7 @@ pub(crate) fn target_machine_factory(
             use_wasm_eh,
             iu_enabled,
         )
-    })
+    }
 }
 
 pub(crate) fn save_temp_bitcode(
