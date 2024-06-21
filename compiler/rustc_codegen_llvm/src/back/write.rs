@@ -291,6 +291,7 @@ pub(crate) fn target_machine_factory(
         let split_dwarf_file = path_to_cstring_helper(config.split_dwarf_file);
         let output_obj_file = path_to_cstring_helper(config.output_obj_file);
 
+
         OwnedTargetMachine::new(
             &triple,
             &cpu,
@@ -316,7 +317,7 @@ pub(crate) fn target_machine_factory(
             use_wasm_eh,
             iu_enabled,
         )
-    }
+    })
 }
 
 pub(crate) fn save_temp_bitcode(
