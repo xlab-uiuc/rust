@@ -226,32 +226,57 @@ pub fn target_machine_factory(
 
     let use_emulated_tls = matches!(sess.tls_model(), TlsModel::Emulated);
 
-        let tm = unsafe {
-            llvm::LLVMRustCreateTargetMachine(
-                triple.as_ptr(),
-                cpu.as_ptr(),
-                features.as_ptr(),
-                abi.as_ptr(),
-                code_model,
-                reloc_model,
-                opt_level,
-                use_softfp,
-                ffunction_sections,
-                fdata_sections,
-                funique_section_names,
-                trap_unreachable,
-                singlethread,
-                asm_comments,
-                emit_stack_size_section,
-                relax_elf_relocations,
-                use_init_array,
-                iu_enabled,
-                split_dwarf_file.as_ptr(),
-            )
+
+        // copy the exe path, followed by path all into one buffer
+    // null terminating them so we can use them as null terminated strings
+    let args_cstr_buff = {
+        let mut args_cstr_buff: Vec<u8> = Vec::new();
+        let exe_path = std::env::current_exe().unwrap_or_default();
+        let exe_path_str = exe_path.into_os_string().into_string().unwrap_or_default();
+
+        args_cstr_buff.extend_from_slice(exe_path_str.as_bytes());
+        args_cstr_buff.push(0);
+
+        for arg in sess.expanded_args.iter() {
+            args_cstr_buff.extend_from_slice(arg.as_bytes());
+            args_cstr_buff.push(0);
+        }
+
+        args_cstr_buff
+    };
+
+    let debuginfo_compression = sess.opts.debuginfo_compression.to_string();
+    match sess.opts.debuginfo_compression {
+        rustc_session::config::DebugInfoCompression::Zlib => {
+            if !unsafe { LLVMRustLLVMHasZlibCompressionForDebugSymbols() } {
+                sess.dcx().emit_warn(UnknownCompression { algorithm: "zlib" });
+            }
+        }
+        rustc_session::config::DebugInfoCompression::Zstd => {
+            if !unsafe { LLVMRustLLVMHasZstdCompressionForDebugSymbols() } {
+                sess.dcx().emit_warn(UnknownCompression { algorithm: "zstd" });
+            }
+        }
+        rustc_session::config::DebugInfoCompression::None => {}
+    };
+    let debuginfo_compression = SmallCStr::new(&debuginfo_compression);
+
+    let file_name_display_preference =
+        sess.filename_display_preference(RemapPathScopeComponents::DEBUGINFO);
+
+    Arc::new(move |config: TargetMachineFactoryConfig| {
+        let path_to_cstring_helper = |path: Option<PathBuf>| -> CString {
+            let path = path.unwrap_or_default();
+            let path = path_mapping
+                .to_real_filename(path)
+                .to_string_lossy(file_name_display_preference)
+                .into_owned();
+            CString::new(path).unwrap()
         };
 
         let split_dwarf_file = path_to_cstring_helper(config.split_dwarf_file);
         let output_obj_file = path_to_cstring_helper(config.output_obj_file);
+
 
         OwnedTargetMachine::new(
             &triple,
@@ -278,7 +303,7 @@ pub fn target_machine_factory(
             &args_cstr_buff,
             iu_enabled,
         )
-    }
+    })
 }
 
 pub(crate) fn save_temp_bitcode(
