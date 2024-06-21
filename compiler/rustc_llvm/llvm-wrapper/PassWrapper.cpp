@@ -409,8 +409,8 @@ extern "C" LLVMTargetMachineRef LLVMRustCreateTargetMachine(
     const char *OutputObjFile,
     const char *DebugInfoCompression,
     bool UseEmulatedTls,
-    const char *ArgsCstrBuff, size_t ArgsCstrBuffLen) {
     bool IUEnabled,
+    const char *ArgsCstrBuff, size_t ArgsCstrBuffLen) {
 
   auto OptLevel = fromRust(RustOptLevel);
   auto RM = fromRust(RustReloc);
