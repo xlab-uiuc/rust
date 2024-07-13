@@ -235,7 +235,7 @@ pub(crate) fn target_machine_factory(
 
     let path_mapping = sess.source_map().path_mapping().clone();
     let working_dir = sess.source_map().working_dir().clone();
-    let iu_enabled = sess.opts.cg.iu_playground;
+    let rex_enabled = sess.opts.cg.enable_rex;
 
     let use_emulated_tls = matches!(sess.tls_model(), TlsModel::Emulated);
 
@@ -306,7 +306,7 @@ pub(crate) fn target_machine_factory(
             use_emulated_tls,
             use_wasm_eh,
             large_data_threshold,
-            iu_enabled,
+            rex_enabled,
         )
         .unwrap_or_else(|err| dcx.emit_fatal(ParseTargetMachineConfig(err)))
     })
@@ -755,11 +755,8 @@ pub(crate) unsafe fn llvm_optimize(
     let llvm_selfprofiler =
         llvm_profiler.as_mut().map(|s| s as *mut _ as *mut c_void).unwrap_or(std::ptr::null_mut());
 
-    // TODO does the order matter?
-    // Jinghao: maybe? but let's put it at the back for now given the vec
-    // slice is currently empty
     let mut passes_plus_iu = config.passes.clone();
-    if config.iu_playground {
+    if config.enable_rex {
         passes_plus_iu.push("rex-entry-insertion".to_string());
     }
 

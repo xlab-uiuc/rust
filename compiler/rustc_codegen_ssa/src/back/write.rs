@@ -108,7 +108,7 @@ pub struct ModuleConfig {
     pub autodiff: Vec<config::AutoDiff>,
     pub offload: Vec<config::Offload>,
     // Inner unikernel
-    pub iu_playground: bool,
+    pub enable_rex: bool,
 }
 
 impl ModuleConfig {
@@ -260,7 +260,7 @@ impl ModuleConfig {
             llvm_plugins: if_regular!(sess.opts.unstable_opts.llvm_plugins.clone(), vec![]),
             autodiff: if_regular!(sess.opts.unstable_opts.autodiff.clone(), vec![]),
             offload: if_regular!(sess.opts.unstable_opts.offload.clone(), vec![]),
-            iu_playground: sess.opts.cg.iu_playground,
+            enable_rex: sess.opts.cg.enable_rex,
         }
     }
 
