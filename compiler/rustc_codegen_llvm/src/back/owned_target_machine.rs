@@ -39,7 +39,7 @@ impl OwnedTargetMachine {
         debug_info_compression: &CStr,
         use_emulated_tls: bool,
         use_wasm_eh: bool,
-        iu_enabled: bool,
+        rex_enabled: bool,
     ) -> Result<Self, LlvmError<'static>> {
         // SAFETY: llvm::LLVMRustCreateTargetMachine copies pointed to data
         let tm_ptr = unsafe {
@@ -61,7 +61,7 @@ impl OwnedTargetMachine {
                 emit_stack_size_section,
                 relax_elf_relocations,
                 use_init_array,
-                iu_enabled,
+                rex_enabled,
                 split_dwarf_file.as_ptr(),
                 output_obj_file.as_ptr(),
                 debug_info_compression.as_ptr(),
