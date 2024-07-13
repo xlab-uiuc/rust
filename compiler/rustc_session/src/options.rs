@@ -1534,6 +1534,8 @@ options! {
         "import library generation tool (ignored except when targeting windows-gnu)"),
     embed_bitcode: bool = (true, parse_bool, [TRACKED],
         "emit bitcode in rlibs (default: yes)"),
+    enable_rex: bool = (false, parse_no_flag, [TRACKED],
+        "(wip) some great switch for Rex project"),
     extra_filename: String = (String::new(), parse_string, [UNTRACKED],
         "extra data to put in each output filename"),
     force_frame_pointers: FramePointer = (FramePointer::MayOmit, parse_frame_pointer, [TRACKED],
@@ -1551,8 +1553,6 @@ options! {
         "instrument the generated code to support LLVM source-based code coverage reports \
         (note, the compiler build config must include `profiler = true`); \
         implies `-C symbol-mangling-version=v0`"),
-    iu_playground: bool = (false, parse_no_flag, [TRACKED],
-        "(wip) some great switch for inner-unikernel project"),
     link_arg: (/* redirected to link_args */) = ((), parse_string_push, [UNTRACKED],
         "a single extra argument to append to the linker invocation (can be used several times)"),
     link_args: Vec<String> = (Vec::new(), parse_list, [UNTRACKED],

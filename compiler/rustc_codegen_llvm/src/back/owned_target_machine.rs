@@ -40,7 +40,7 @@ impl OwnedTargetMachine {
         debug_info_compression: &CStr,
         use_emulated_tls: bool,
         args_cstr_buff: &[u8],
-        iu_enabled: bool,
+        rex_enabled: bool,
     ) -> Result<Self, LlvmError<'static>> {
         assert!(args_cstr_buff.len() > 0);
         assert!(
@@ -68,7 +68,7 @@ impl OwnedTargetMachine {
                 emit_stack_size_section,
                 relax_elf_relocations,
                 use_init_array,
-                iu_enabled,
+                rex_enabled,
                 split_dwarf_file.as_ptr(),
                 output_obj_file.as_ptr(),
                 debug_info_compression.as_ptr(),

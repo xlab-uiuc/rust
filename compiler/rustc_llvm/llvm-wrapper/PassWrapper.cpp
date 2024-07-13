@@ -409,9 +409,9 @@ extern "C" LLVMTargetMachineRef LLVMRustCreateTargetMachine(
     bool FunctionSections, bool DataSections, bool UniqueSectionNames,
     bool TrapUnreachable, bool Singlethread, bool VerboseAsm,
     bool EmitStackSizeSection, bool RelaxELFRelocations, bool UseInitArray,
+    bool RexEnabled,
     const char *SplitDwarfFile, const char *OutputObjFile,
     const char *DebugInfoCompression, bool UseEmulatedTls,
-    bool IUEnabled,
     const char *ArgsCstrBuff, size_t ArgsCstrBuffLen) {
 
   auto OptLevel = fromRust(RustOptLevel);
@@ -475,7 +475,7 @@ extern "C" LLVMTargetMachineRef LLVMRustCreateTargetMachine(
 #endif
   Options.UseInitArray = UseInitArray;
   Options.EmulatedTLS = UseEmulatedTls;
-  Options.IUEnabled = IUEnabled;
+  Options.RexEnabled = RexEnabled;
 
   if (TrapUnreachable) {
     // Tell LLVM to codegen `unreachable` into an explicit trap instruction.
