@@ -343,6 +343,7 @@ const X86_ALLOWED_FEATURES: &[(&str, Stability, ImpliedFeatures)] = &[
     ("xsavec", Stable, &["xsave"]),
     ("xsaveopt", Stable, &["xsave"]),
     ("xsaves", Stable, &["xsave"]),
+    ("soft-float", Stable),
     // tidy-alphabetical-end
 ];
 
