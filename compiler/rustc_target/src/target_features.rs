@@ -243,6 +243,7 @@ const X86_ALLOWED_FEATURES: &[(&str, Stability)] = &[
     ("sse4.2", Stable),
     ("sse4a", Unstable(sym::sse4a_target_feature)),
     ("ssse3", Stable),
+    ("soft-float", Stable),
     ("tbm", Unstable(sym::tbm_target_feature)),
     ("vaes", Unstable(sym::avx512_target_feature)),
     ("vpclmulqdq", Unstable(sym::avx512_target_feature)),
