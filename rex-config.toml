@@ -551,10 +551,10 @@ codegen-units-std = 1
 #split-debuginfo = see target.<triple>.split-debuginfo
 
 # Whether or not `panic!`s generate backtraces (RUST_BACKTRACE)
-#backtrace = true
+backtrace = true
 
 # Whether to always use incremental compilation when building rustc
-#incremental = false
+incremental = false
 
 # Build a multi-threaded rustc. This allows users to use parallel rustc
 # via the unstable option `-Z threads=n`.
@@ -651,7 +651,7 @@ dist-src = false
 
 # Indicates whether LLD will be compiled and made available in the sysroot for
 # rustc to execute.
-#lld = false
+lld = false
 
 # Indicates whether LLD will be used to link Rust crates during bootstrap on
 # supported platforms.
@@ -897,20 +897,17 @@ linker = "gcc"
 # on linux
 src-tarball = false
 
-# Whether to allow failures when building tools
-#missing-tools = false
-
 # List of compression formats to use when generating dist tarballs. The list of
 # formats is provided to rust-installer, which must support all of them.
 #
 # This list must be non-empty.
-#compression-formats = ["gz", "xz"]
+compression-formats = ["xz"]
 
 # How much time should be spent compressing the tarballs. The better the
 # compression profile, the longer compression will take.
 #
 # Available options: fast, balanced, best
-#compression-profile = "fast"
+compression-profile = "balanced"
 
 # Copy the linker, DLLs, and various libraries from MinGW into the Rust toolchain.
 # Only applies when the host or target is pc-windows-gnu.
