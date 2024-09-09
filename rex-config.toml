@@ -30,7 +30,7 @@
 #
 # If `change-id` does not match the version that is currently running,
 # `x.py` will inform you about the changes made on bootstrap.
-change-id = 123711
+change-id = 127866
 
 # =============================================================================
 # Tweaking how LLVM is compiled
@@ -254,6 +254,10 @@ docs = false
 # executing the debuginfo test suite.
 #gdb = "gdb"
 
+# The path to (or name of) the LLDB executable to use. This is only used for
+# executing the debuginfo test suite.
+#lldb = "lldb"
+
 # The node.js executable to use. Note that this is only used for the emscripten
 # target when running tests, otherwise this can be omitted.
 #nodejs = "node"
@@ -330,7 +334,7 @@ tools = [
     "rust-analyzer-proc-macro-srv",
     "analysis",
     "src",
-    "rust-demangler",  # if profiler = true
+    "rust-demangler",
 ]
 
 # Verbosity level: 0 == not verbose, 1 == verbose, 2 == very verbose, 3 == print environment variables on each rustc invocation
@@ -649,8 +653,11 @@ dist-src = false
 # when no explicit backend is specified.
 #codegen-backends = ["llvm"]
 
-# Indicates whether LLD will be compiled and made available in the sysroot for
-# rustc to execute.
+# Indicates whether LLD will be compiled and made available in the sysroot for rustc to execute, and
+# whether to set it as rustc's default linker on `x86_64-unknown-linux-gnu`. This will also only be
+# when *not* building an external LLVM (so only when using `download-ci-llvm` or building LLVM from
+# the in-tree source): setting `llvm-config` in the `[target.x86_64-unknown-linux-gnu]` section will
+# make this default to false.
 lld = false
 
 # Indicates whether LLD will be used to link Rust crates during bootstrap on
