@@ -389,7 +389,7 @@ const X86_FEATURES: &[(&str, Stability, ImpliedFeatures)] = &[
     ("xsavec", Stable, &["xsave"]),
     ("xsaveopt", Stable, &["xsave"]),
     ("xsaves", Stable, &["xsave"]),
-    ("soft-float", Stable),
+    ("soft-float", Stable, &[]),
     // tidy-alphabetical-end
     // FIXME: need to also forbid turning off `x87` on hardfloat targets
 ];
