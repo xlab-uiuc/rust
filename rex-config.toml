@@ -564,7 +564,7 @@ incremental = false
 # via the unstable option `-Z threads=n`.
 # Since stable/beta channels only allow using stable features,
 # `parallel-compiler = false` should be set for these channels.
-parallel-compiler = false
+parallel-compiler = true
 
 # The default linker that will be hard-coded into the generated
 # compiler for targets that don't specify a default linker explicitly
