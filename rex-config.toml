@@ -587,7 +587,7 @@ incremental = false
 # setting.
 #
 # See https://doc.rust-lang.org/rustc/codegen-options/index.html#linker for more information.
-default-linker = "gcc"
+default-linker = "clang"
 
 # The "channel" for the Rust build to produce. The stable/beta channels only
 # allow using stable features, whereas the nightly and dev channels allow using
@@ -761,26 +761,26 @@ lto = "thin"
 # default value is platform specific, and if not specified it may also depend on
 # what platform is crossing to what platform.
 # See `src/bootstrap/cc_detect.rs` for details.
-cc = "gcc"
+cc = "clang"
 
 # C++ compiler to be used to compile C++ code (e.g. LLVM and our LLVM shims).
 # This is only used for host targets.
 # See `src/bootstrap/cc_detect.rs` for details.
-cxx = "g++"
+cxx = "clang++"
 
 # Archiver to be used to assemble static libraries compiled from C/C++ code.
 # Note: an absolute path should be used, otherwise LLVM build will break.
-ar = "ar"
+ar = "llvm-ar"
 
 # Ranlib to be used to assemble static libraries compiled from C/C++ code.
 # Note: an absolute path should be used, otherwise LLVM build will break.
-ranlib = "ranlib"
+ranlib = "llvm-ranlib"
 
 # Linker to be used to bootstrap Rust code. Note that the
 # default value is platform specific, and if not specified it may also depend on
 # what platform is crossing to what platform.
 # Setting this will override the `use-lld` option for Rust code when targeting MSVC.
-linker = "gcc"
+linker = "clang"
 
 # Should rustc and the standard library be built with split debuginfo? Default
 # is platform dependent.
