@@ -592,7 +592,7 @@ incremental = false
 # setting.
 #
 # See https://doc.rust-lang.org/rustc/codegen-options/index.html#linker for more information.
-default-linker = "clang"
+#default-linker = <none> (path)
 
 # The "channel" for the Rust build to produce. The stable/beta channels only
 # allow using stable features, whereas the nightly and dev channels allow using
@@ -676,7 +676,7 @@ dist-src = false
 # when *not* building an external LLVM (so only when using `download-ci-llvm` or building LLVM from
 # the in-tree source): setting `llvm-config` in the `[target.x86_64-unknown-linux-gnu]` section will
 # make this default to false.
-lld = false
+#lld = false in all cases, except on `x86_64-unknown-linux-gnu` as described above, where it is true
 
 # Indicates whether LLD will be used to link Rust crates during bootstrap on
 # supported platforms.
