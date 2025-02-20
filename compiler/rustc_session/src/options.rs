@@ -2074,7 +2074,7 @@ options! {
         "version of DWARF debug information to emit (default: 2 or 4, depending on platform)"),
     embed_bitcode: bool = (true, parse_bool, [TRACKED],
         "emit bitcode in rlibs (default: yes)"),
-    enable_rex: bool = (false, parse_no_flag, [TRACKED],
+    enable_rex: bool = (false, parse_no_value, [TRACKED],
         "(wip) some great switch for Rex project"),
     extra_filename: String = (String::new(), parse_string, [UNTRACKED],
         "extra data to put in each output filename"),
