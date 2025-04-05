@@ -30,7 +30,7 @@
 #
 # If `change-id` does not match the version that is currently running,
 # `x.py` will inform you about the changes made on bootstrap.
-change-id = 134650
+change-id = 136941
 
 # =============================================================================
 # Tweaking how LLVM is compiled
@@ -511,7 +511,7 @@ codegen-units-std = 1
 # These can help find bugs at the cost of a small runtime slowdown.
 #
 # Defaults to rust.debug value
-#debug-assertions = rust.debug (boolean)
+debug-assertions = false
 
 # Whether or not debug assertions are enabled for the standard library.
 # Overrides the `debug-assertions` option, if defined.
