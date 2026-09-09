@@ -30,7 +30,7 @@
 #
 # If `change-id` does not match the version that is currently running,
 # `x.py` will inform you about the changes made on bootstrap.
-change-id = 154508
+change-id = 158169
 
 # =============================================================================
 # Tweaking how LLVM is compiled
